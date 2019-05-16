@@ -1,0 +1,31 @@
+- hosts: servidores
+  become: true
+  tasks:
+    - name: Limpeza de Cache do YUM
+      shell: yum clean all
+      tags: limpar
+    
+    - name: Removendo subscrição da RedHat
+      shell: subscription-manager remove  --all; subscription-manager unregister; subscription-manager clean
+      tags: limpar
+
+    - name: Registrando no repositorio RedHat
+      redhat_subscription:
+        state: present
+        username: user
+        password: 'senha'
+        auto_attach: true
+        autosubscribe: true
+      tags: subscrever
+
+    - name: Habilitando repositorios RedHat
+      rhsm_repository:
+        name: "{{ item }}"
+        state: enabled
+      with_items:
+          - rhel-7-server-rpms
+          - rhel-7-server-eus-rpms
+          - rhel-7-server-extras-rpms
+          - rhel-server-rhscl-7-rpms
+      tags: repositorio
+

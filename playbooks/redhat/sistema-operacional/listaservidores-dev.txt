@@ -1,0 +1,5 @@
+[servidores]
+#servidor01.exemplo.com.br
+#servidor02.exemplo.com.br
+#servidor03.exemplo.com.br
+

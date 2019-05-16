@@ -1,0 +1,29 @@
+- hosts: servidores
+  become: true
+  tasks:
+    
+    - name: Contigurando timezone para America/Bahia
+      shell: timedatectl set-timezone America/Bahia
+
+    - name: Instalando NTP
+      yum: name=ntp state=installed
+      tags: ntp
+
+    - name: Copiando arquivo de configuração do NTP
+      copy:
+        src: ./ntp.conf
+        dest: /etc/ntp.conf
+        owner: root
+        group: root
+        mode: 0644
+      tags: ntp
+
+    - name: Habilitando o serviço NTP
+      service:
+        name: ntpd
+        enabled: yes
+
+    - name: Iniciando o serviço NTP
+      service:
+        name: ntpd
+        state: started
