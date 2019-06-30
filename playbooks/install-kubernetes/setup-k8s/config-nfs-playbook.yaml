@@ -1,0 +1,27 @@
+- hosts: localhost
+  become: true
+  tasks:
+
+    - name: Criando diretórios em /nfsroot/kubernetes/
+      file:
+        path: /nfsroot/kubernetes/{{ item }}
+        state: directory
+        mode: "755"
+        recurse: yes
+      with_items:
+        - grafana
+        - prometheus
+        - jenkins
+
+    - name: Confiugurando diretórios nos exports do NFS
+      lineinfile:
+        path: /etc/exports
+        line: /nfsroot/kubernetes/{{ item }} {{ ansible_default_ipv4.address }}(rw,sync,no_root_squash)
+        create: yes
+      with_items:
+        - grafana
+        - prometheus
+        - jenkins
+    
+    - name: Exportando volumes confugurados
+      shell: exportfs -av

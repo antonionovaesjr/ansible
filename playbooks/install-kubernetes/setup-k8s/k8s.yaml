@@ -2,11 +2,15 @@
   strategy: debug
   become: true
   tasks:
+        
+    - name: Congigurando IP do k8s-master no hosts
+      shell: echo {{ ansible_default_ipv4.address }} k8s-master >> /etc/hosts
+      tags: iphosts
 
     - name: Desabilitando SELinux em runtime
       shell: setenforce 0
     
-  - name: Desabilitando SELinux peristente
+    - name: Desabilitando SELinux peristente
       selinux:
         policy: targeted
         state: disabled
@@ -182,13 +186,13 @@
     
     - name: Configurando dashboard kubernetes
       #shell: kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended/kubernetes-dashboard.yaml
-      shell: kubectl apply -f /root/k8s-setup/kubernetes-dashboard.yaml
+      shell: kubectl apply -f /root/setup-k8s/kubernetes-dashboard.yaml
   
     - name: Configurando NodePort do Dashboard
       shell: kubectl -n kube-system delete svc kubernetes-dashboard &&  kubectl expose deployment kubernetes-dashboard --type=NodePort --name=kubernetes-dashboard -n kube-system
     
     - name: Aplicando permissão ao dashboard
-      shell: kubectl -f /root/k8s-setup/role-cluster.yaml
+      shell: kubectl apply -f /root/setup-k8s/role-cluster.yaml
     
     - name: Exibindo token de acesso
       shell: kubectl -n kube-system get secret |grep  kubernetes-dashboard-token |cut -f1 -d ' ' |  xargs kubectl -n kube-system describe  secret

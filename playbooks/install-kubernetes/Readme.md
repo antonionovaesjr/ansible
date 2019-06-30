@@ -17,7 +17,7 @@ git clone https://github.com/antonionovaesjr/ansible.git
 
 mv /root/ansible/playbooks/install-kubernetes/setup-k8s /root/
 
-ansible-playbook /root/setup-k8s/k8s,yaml
+ansible-playbook /root/setup-k8s/k8s.yaml
 ```
 
 ### Node Minio
