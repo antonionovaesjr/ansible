@@ -1,4 +1,4 @@
-# Instalação de Kuberetes 
+# Instalação de Kubernetes  - k8s
 
 Objetivo: Instalação de ambiente kubernetes
 
