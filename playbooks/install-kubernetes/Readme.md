@@ -6,6 +6,12 @@ Objetivo: Instalação de ambiente kubernetes
 
 Nota: até o momento, este playbook hablita o master para executar pods, caso não queira este recurso, remova "task": Habilitar Schedule no Node maste
 
+## Pré-requisitos
+
+- Acesso a internet
+- SELinux desabilitado
+- CentOS 7
+
 ### Node Master
 
 Logado como root no node master, execute:
