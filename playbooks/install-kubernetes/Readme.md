@@ -17,7 +17,7 @@ Nota: at√© o momento, este playbook hablita o master para executar pods, caso n√
 Logado como root no node master, execute:
 
 ```sh
-yum install ansibble git -y
+yum install ansible git -y
 
 cd /root/
 
