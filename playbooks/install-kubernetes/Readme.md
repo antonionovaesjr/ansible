@@ -28,7 +28,7 @@ mv /root/ansible/playbooks/install-kubernetes/setup-k8s /root/
 ansible-playbook /root/setup-k8s/k8s.yaml
 ansible-playbook /root/setup-k8s/kubernetes-dashboard.yaml
 ansible-playbook /root/setup-k8s/role-cluster.yaml
-ansible-playbook /root/setup-k8s/config-nfs-playbook.yaml
+ansible-playbook /root/setup-k8s/config-nfs-playbook.yaml (passo opicional)
 ```
 
 ### Node Minio
