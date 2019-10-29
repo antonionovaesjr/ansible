@@ -7,13 +7,13 @@
       shell: echo {{ ansible_default_ipv4.address }} k8s-master >> /etc/hosts
       tags: iphosts
 
-    - name: Desabilitando SELinux em runtime
-      shell: setenforce 0
+    #- name: Desabilitando SELinux em runtime
+      #shell: setenforce 0
     
-    - name: Desabilitando SELinux peristente
-      selinux:
-        policy: targeted
-        state: disabled
+    #- name: Desabilitando SELinux peristente
+    #  selinux:
+    #    policy: targeted
+    #    state: disabled
 
     - name: Atualizando pacotes do sistema operacional
       yum:
